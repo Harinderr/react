@@ -1,0 +1,27 @@
+.container {
+    width: 15rem;
+    background-color: rgb(235, 235, 235);
+    float: left;
+    margin: 10px;
+    
+}
+.pic > img {
+    width: 100%;
+    height: 8rem;
+}
+.title {
+    font-size: 1rem;
+}
+.channelName {
+    font-size: .8rem;
+}
+.views {
+    font-size: .7rem;
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+.videoinfo {
+    padding: 5px 15px;
+}
