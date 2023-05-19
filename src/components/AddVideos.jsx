@@ -1,51 +1,53 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
 
+const intitalState = {
+  title: "",
+  channel: "",
+  views: "10k",
+  time: "2 months ago",
+  verified: true,
+};
+export default function AddVideo({ allVideos, updatedVideo ,edvideo}) {
+ 
 
-
-  const videoContent =  [
-    {
-      id: 1,
-      title: "mern Stack developer",
-      channel: "Fantasma",
-      views: "50k",
-      time: "2 months ago",
-      verified: true,
-    },
-    {
-      id: 2,
-      title: "Software developer",
-      channel: "Code Dost",
-      views: "50k",
-      time: "2 months ago",
-      verified: false,
-    },
-    {
-      id: 3,
-      title: "Java intermediate",
-      channel: "Apna collage",
-      views: "50k",
-      time: "2 months ago",
-      verified: true,
-    },
-  ];
- export default function  AddVideos(e){
-    e.stopPropogation()
-    const [video , setVideo] = useState(videoContent)
-    function videobtn(){
-        setVideo([...video,{ 
-            id: 3,
-            title: "Java intermediate",
-            channel: "Apna collage",
-            views: "50k",
-            time: "2 months ago",
-            verified: true,
-          }])
+  const [video, setVideo] = useState(intitalState);
+  function changeText(e) {
+    
+    setVideo({ ...video, [e.target.name]: e.target.value });
+    
+  }
+  function renderedContent(e) {
+    e.preventDefault();
+    if((Object.keys(edvideo)).length !== 0){
+       updatedVideo(video)
     }
-    return  (
-        <div className="addbtn">
-            <button onClick={videobtn}>
-                Add Videos
-            </button>
-        </div>
-    )
+   else {
+    allVideos(video);
+   }
+
+    setVideo(intitalState)
+  }
+ useEffect(()=> {
+    setVideo(edvideo)
+ },[edvideo])
+
+  return (
+    <form action="">
+      <input
+        type="text"
+        onChange={changeText}
+        name="title"
+        placeholder="Enter title"
+        value={video.title}
+      />
+      <input
+        type="text"
+        onChange={changeText}
+        name="channel"
+        placeholder="Enter Channnel"
+        value={video.channel}
+      />
+      <button onClick={renderedContent}> {(Object.keys(edvideo)).length !== 0 ? 'Edit' : 'Add'} Video</button>
+    </form>
+  );
 }
