@@ -1,45 +1,10 @@
-import { useState } from "react";
 import React from "react";
-import { videoContent } from "./components/VideoContent";
-import VideoList from "./components/VideoList";
-import AddVideo from "./components/AddVideos";
-
+import Todo from "./components/Todo";
 function App() {
-  const [videos, setVideos] = useState(videoContent)
-  const [editvideo , setEditvideo] = useState({})
-  function allVideos(video){
-     setVideos([
-      ...videos,
-      {...video, id : videos.length+1}
-     ])
-  }
-  function closeVideo(parameter){
-   const item = videos.filter(val => val.id !== parameter)
-     setVideos(item)
-  }
-  function editVideo(parameter){
-
-    const item = videos.find(val => val.id === parameter)
-   setEditvideo(item)
-
-  }
-  
-  function updatedVideo(val){
-   const index = videos.findIndex(v => v.id === val.id)
-
-  const updatedValue = [...videos]
-  updatedValue.splice(index,1,val)
-  setVideos(updatedValue)
-  setEditvideo({})
- }
+ 
   return (
-  <>
-    <VideoList myvideos={videos}  closeVideo={closeVideo} editVideo={editVideo}> </VideoList>
-  <AddVideo allVideos={allVideos}  updatedVideo={updatedVideo} edvideo={editvideo}></AddVideo>
-  </>
-
- )
-
+    <Todo></Todo>
+  )
 }
 
 export default App;

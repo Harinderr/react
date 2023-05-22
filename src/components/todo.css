@@ -1,0 +1,35 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 50px;
+}
+.todoapp {
+    width: 100%;
+
+}
+
+ul {
+    
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+}
+li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+   align-items: center;
+    list-style: none;
+    font-size: 50px;
+    border-bottom: 1px solid green;
+}
+.edit {
+
+}
+.delete {
+
+}
