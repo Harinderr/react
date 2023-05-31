@@ -1,12 +1,14 @@
- import './video.css'
+ import { useContext } from 'react';
+import './video.css'
+import ThemeContext from '../content/ThemeContext';
 
 function Video({title,channel,views,time,id,closeVideo,editVideo}){
-  
+  const Theme = useContext(ThemeContext)
     return (
         <>
-        <div className="container">
-            <button className='close' onClick={()=>closeVideo(id)}>×</button>
-            <button className='edit'onClick={()=> editVideo(id)}>Edit</button>
+        <div className={`container ${Theme}`}>
+            <button className={`close ${Theme}`}onClick={()=>closeVideo(id)}>×</button>
+            <button className={`edit ${Theme}`}onClick={()=> editVideo(id)}>Edit</button>
        <div className="pic"> <img
           src={`https://picsum.photos/id/${id}/200/300`}
          

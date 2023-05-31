@@ -7,7 +7,7 @@ export default function VideoList({myvideos, closeVideo,editVideo}) {
 
   return (
     <>
-      <h1> hello world </h1>
+  
       {myvideos.map((val, index) => 
         <Video
           key={index}

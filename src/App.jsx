@@ -1,9 +1,10 @@
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState,useEffect } from "react";
 import React from "react";
 import { videoContent } from "./components/VideoContent";
 import VideoList from "./components/VideoList";
 import AddVideo from "./components/AddVideos";
-
+import ThemeContext from "./content/ThemeContext";
+import './App.css'
 
 
 function App() {
@@ -27,10 +28,14 @@ function App() {
             }
        }
 
+       const themecontext  = useContext(ThemeContext)
+       const [mode , setMode] = useState(themecontext)
 
-
-
- 
+       useEffect(() => {
+        document.querySelector(".main").classList.remove(themecontext);
+        document.querySelector(".main").classList.add(mode);
+      }, [mode]);
+    
 
  
   function closeVideo(parameter){
@@ -46,11 +51,13 @@ function App() {
   
 
   return (
-  <>
+    <ThemeContext.Provider value={mode}>
+  <div className={`main ${themecontext}`}>
+    <button type="button" class="btn btn-secondary"onClick={()=>{ mode==='darkmode'? setMode('lightmode'): setMode('darkmode') }  }>Mode</button>
     <VideoList myvideos={videos}  closeVideo={closeVideo} editVideo={editVideo}> </VideoList>
   <AddVideo dispatch={dispatch} edvideo={editvideo}></AddVideo>
-  </>
-
+  </div>
+  </ThemeContext.Provider>
  )
 
 }
