@@ -4,31 +4,38 @@ import { videoContent } from "./components/VideoContent";
 import VideoList from "./components/VideoList";
 import AddVideo from "./components/AddVideos";
 
+
+
 function App() {
-       function videoReducer(state, action) {
+  const [editvideo , setEditvideo] = useState({})
+  const [videos, dispatch] = useReducer(videoReducer ,videoContent)
+       function videoReducer(videos, action) {
             switch(action.type){
               case 'ADD' :
-                return 
+                return [
+                  ...videos,
+                  {...action.payload, id : videos.length+1}
+                 ]
+               case 'DELETE':
+                  return videos.filter(val => val.id !== action.payload)
+               case 'UPDATE': 
+              const index = videos.findIndex(v => v.id === action.payload.id)
+             const updatedValue = [...videos]
+               updatedValue.splice(index,1,action.payload) 
+               setEditvideo({})
+               return updatedValue
             }
        }
 
 
 
-  const [videos, dispatch] = useReducer(videoReducer ,videoContent)
-  // const [videos, setVideos] = useState(videoContent)
-  const [editvideo , setEditvideo] = useState({})
 
-  function allVideos(video){
-    dispatch{(type: "ADD", payload:video)}
+ 
 
-     setVideos([
-      ...videos,
-      {...video, id : videos.length+1}
-     ])
-  }
+ 
   function closeVideo(parameter){
-   const item = videos.filter(val => val.id !== parameter)
-     setVideos(item)
+    dispatch({type : 'DELETE',payload:parameter})
+  
   }
   function editVideo(parameter){
 
@@ -37,18 +44,11 @@ function App() {
 
   }
   
-  function updatedVideo(val){
-   const index = videos.findIndex(v => v.id === val.id)
 
-  const updatedValue = [...videos]
-  updatedValue.splice(index,1,val)
-  setVideos(updatedValue)
-  setEditvideo({})
- }
   return (
   <>
     <VideoList myvideos={videos}  closeVideo={closeVideo} editVideo={editVideo}> </VideoList>
-  <AddVideo allVideos={allVideos}  updatedVideo={updatedVideo} edvideo={editvideo}></AddVideo>
+  <AddVideo dispatch={dispatch} edvideo={editvideo}></AddVideo>
   </>
 
  )

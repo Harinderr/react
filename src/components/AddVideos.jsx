@@ -7,7 +7,7 @@ const intitalState = {
   time: "2 months ago",
   verified: true,
 };
-export default function AddVideo({ allVideos, updatedVideo ,edvideo}) {
+export default function AddVideo({dispatch,edvideo}) {
  
 
   const [video, setVideo] = useState(intitalState);
@@ -19,10 +19,10 @@ export default function AddVideo({ allVideos, updatedVideo ,edvideo}) {
   function renderedContent(e) {
     e.preventDefault();
     if((Object.keys(edvideo)).length !== 0){
-       updatedVideo(video)
+      dispatch({type:'UPDATE', payload: video})
     }
    else {
-    allVideos(video);
+    dispatch({type : "ADD", payload : video})
    }
 
     setVideo(intitalState)
