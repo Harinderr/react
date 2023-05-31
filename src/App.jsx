@@ -5,21 +5,15 @@ import VideoList from "./components/VideoList";
 import AddVideo from "./components/AddVideos";
 
 function App() {
-       function videoReducer(state, action) {
-            switch(action.type){
-              case 'ADD' :
-                return 
-            }
-       }
+      
 
 
 
-  const [videos, dispatch] = useReducer(videoReducer ,videoContent)
-  // const [videos, setVideos] = useState(videoContent)
+   const [videos, setVideos] = useState(videoContent)
   const [editvideo , setEditvideo] = useState({})
 
   function allVideos(video){
-    dispatch{(type: "ADD", payload:video)}
+   
 
      setVideos([
       ...videos,
